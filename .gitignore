@@ -1,0 +1,87 @@
+#------------------------------------------------------------------------------
+# ## Logs ##
+#------------------------------------------------------------------------------
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+#------------------------------------------------------------------------------
+# ## Node / JavaScript Dependencies & Build Artifacts ##
+#------------------------------------------------------------------------------
+node_modules/
+dist/
+dist-ssr/
+
+#------------------------------------------------------------------------------
+# ## Java / Maven / Gradle Build Artifacts ##
+#------------------------------------------------------------------------------
+target/
+build/
+/dist/            # NetBeans specific build output
+/nbdist/          # NetBeans specific build output
+
+# Exclusions for Maven/Gradle wrapper and nested build outputs (allow checking in)
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+#------------------------------------------------------------------------------
+# ## Local configuration / Environment Variables ##
+#------------------------------------------------------------------------------
+*.local
+
+#------------------------------------------------------------------------------
+# ## IDE / Editor Files ##
+#------------------------------------------------------------------------------
+
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# STS / Eclipse
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans
+.sts4-cache/
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/.nb-gradle/
+
+# VS Code
+# Ignore all vscode files by default...
+.vscode/
+# ...but whitelist commonly shared config files
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/settings.json
+!.vscode/tasks.json
+
+# Visual Studio / Other
+*.suo
+*.ntvs*
+*.njsproj
+*.sln # Note: .sln files are sometimes committed, ensure this is desired.
+*.sw? # Vim swap files
+
+#------------------------------------------------------------------------------
+# ## Operating System Files ##
+#------------------------------------------------------------------------------
+.DS_Store
+
+#------------------------------------------------------------------------------
+# ## Miscellaneous ##
+#------------------------------------------------------------------------------
+# HELP.md # Note: HELP.md is often committed, ensure this ignore rule is desired.

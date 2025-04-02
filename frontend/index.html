@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Persistent API & Socket.IO Tester</title>
+  <link rel="stylesheet" href="src/style.css">
+  <script src="https://cdn.socket.io/4.8.1/socket.io.min.js"></script>
+  <!-- crossorigin="anonymous" -->
+</head>
+
+<body>
+  <h1>Persistent API & Socket.IO Tester</h1>
+
+  <div class="controls-section section">
+    <h2>Controls & Data</h2>
+    <div>
+      <button id="export-data-btn">Export All Data</button>
+      <button id="clear-all-data-btn" title="Clear all saved requests, settings, and scratchpad from browser storage"
+        class="danger-btn">Clear All Stored Data</button>
+    </div>
+    <div class="import-group">
+      <label for="import-file-input">Import Data:</label>
+      <input type="file" id="import-file-input" accept=".json">
+      <button id="import-data-btn">Import from File</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="section api-tester">
+      <h2>REST API Tester</h2>
+
+      <div class="request-management">
+        <h3>Manage Requests</h3>
+        <div class="form-group">
+          <label for="request-list-select">Load Saved Request:</label>
+          <select id="request-list-select">
+            <option value="">-- Select a Request --</option>
+          </select>
+          <button id="update-request-btn" title="Save changes to selected request">Update Selected</button>
+          <button id="delete-request-btn" title="Delete selected request" class="danger-btn">Delete Selected</button>
+        </div>
+        <div class="form-group">
+          <label for="request-name-input">Save Current As:</label>
+          <input type="text" id="request-name-input" placeholder="e.g., Get Users List">
+          <button id="save-request-btn">Save New Request</button>
+        </div>
+        <input type="hidden" id="loaded-request-id-input">
+      </div>
+
+      <div class="request-details">
+        <h3>Request Details</h3>
+        <div class="form-group">
+          <label for="api-method-select">Method:</label>
+          <select id="api-method-select">
+            <option value="GET">GET</option>
+            <option value="POST">POST</option>
+            <option value="PUT">PUT</option>
+            <option value="DELETE">DELETE</option>
+            <option value="PATCH">PATCH</option>
+            <option value="OPTIONS">OPTIONS</option>
+            <option value="HEAD">HEAD</option>
+          </select>
+          <label for="api-url-input">URL:</label>
+          <input type="text" id="api-url-input" placeholder="e.g., http://localhost:8080/api/users">
+        </div>
+
+        <div class="form-group">
+          <label for="api-headers-textarea">Request Headers (one per line, key: value):</label>
+          <textarea id="api-headers-textarea" rows="4"
+            placeholder="Content-Type: application/json&#10;Authorization: Bearer your_token"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="api-body-textarea">Request Body (JSON for POST/PUT/PATCH):</label>
+          <textarea id="api-body-textarea" rows="6" placeholder='{ "key": "value" }'></textarea>
+        </div>
+
+        <button id="send-api-request-btn">Send Request</button>
+      </div>
+
+      <div class="response-area">
+        <h3>Response</h3>
+        <div id="api-status-el">Status: -</div>
+        <h4>Headers:</h4>
+        <pre><code id="api-response-headers-el"></code></pre>
+        <h4>Body:</h4>
+        <pre><code id="api-response-body-el"></code></pre>
+      </div>
+
+      <div class="scripting-area">
+        <h3>Response Tests (Simple JS)</h3>
+        <textarea id="api-test-script-textarea" rows="5"
+          placeholder="/* Access response via: lastResponse object */&#10;console.assert(lastResponse.status === 200, 'Status should be 200');&#10;console.assert(lastResponse.body.id !== null, 'ID should exist');"></textarea>
+        <button id="run-api-tests-btn">Run Tests</button>
+        <h4>Test Results:</h4>
+        <pre><code id="api-test-results-el"></code></pre>
+      </div>
+    </div>
+    <div class="section socket-tester">
+      <h2>Socket.IO Tester</h2>
+      <div class="form-group">
+        <label for="socket-url-input">Server URL:</label>
+        <input type="text" id="socket-url-input" placeholder="e.g., http://localhost:9092">
+      </div>
+      <div class="form-group">
+        <label for="socket-conn-headers-textarea">Connection Headers (one per line, key: value):</label>
+        <textarea id="socket-conn-headers-textarea" rows="3"
+          placeholder="Authorization: Bearer your_token&#10;X-Client-ID: web-tester"></textarea>
+      </div>
+      <div class="form-group">
+        <button id="socket-connect-btn">Connect</button>
+        <button id="socket-disconnect-btn" disabled>Disconnect</button>
+      </div>
+      <div id="socket-status-el">Status: Disconnected</div>
+
+      <div class="socket-emit">
+        <h3>Emit Event</h3>
+        <label for="socket-event-name-input">Event Name:</label>
+        <input type="text" id="socket-event-name-input" placeholder="e.g., sendMessageToServer">
+        <label for="socket-event-data-textarea">Data (JSON):</label>
+        <textarea id="socket-event-data-textarea" rows="4"
+          placeholder='{ "channelId": "general", "text": "Hello from tester!" }'></textarea>
+        <button id="socket-emit-btn" disabled>Emit</button>
+      </div>
+
+      <div class="socket-log">
+        <h3>Incoming Events Log</h3>
+        <button id="socket-clear-log-btn">Clear Log</button>
+        <pre><code id="socket-log-area-el"></code></pre>
+      </div>
+    </div>
+    <div class="section scratchpad-section">
+      <h2>Scratchpad</h2>
+      <textarea id="scratchpad-textarea" rows="10"
+        placeholder="Persistent notes... saved automatically when focus leaves the area."></textarea>
+    </div>
+  </div>
+  <script src="src/srcipt.js"></script>
+</body>
+
+</html>
