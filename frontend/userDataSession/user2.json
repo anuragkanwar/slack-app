@@ -1,0 +1,290 @@
+{
+  "savedRequests": [
+    {
+      "id": "m8ymvj3yhsa85an",
+      "name": "Auth Signup",
+      "url": "http://localhost:8080/api/auth/signup",
+      "method": "POST",
+      "headers": "",
+      "body": "{\n    \"username\": \"user2\",\n    \"email\" : \"user2@gmail.com\",\n    \"password\": \"user2\"\n}",
+      "testScript": "",
+      "lastResponse": {
+        "timestamp": "2025-04-02T04:15:04.331Z",
+        "status": 200,
+        "statusText": "",
+        "ok": true,
+        "headers": {
+          "access-control-allow-credentials": "true",
+          "access-control-allow-origin": "http://localhost:5173",
+          "authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMiIsImlhdCI6MTc0MzU2NzMwNCwiZXhwIjoxNzQ0MTcyMTA0fQ.a_f3-9KFlbuyhHZGxLW2dCTuZTmr2MaVVdllUkyEec8",
+          "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+          "content-type": "application/json",
+          "expires": "0",
+          "pragma": "no-cache"
+        },
+        "body": {
+          "id": 2,
+          "username": "user2",
+          "email": "user2@gmail.com",
+          "wsUrl": "ws://localhost:8086"
+        }
+      }
+    },
+    {
+      "id": "m8yn3v4g45ndz2x",
+      "name": "Auth Login",
+      "url": "http://localhost:8080/api/auth/login",
+      "method": "POST",
+      "headers": "",
+      "body": "{\n    \"username\" : \"user2\",\n    \"password\": \"user2\"\n}",
+      "testScript": "",
+      "lastResponse": {
+        "timestamp": "2025-04-02T04:10:06.912Z",
+        "status": 200,
+        "statusText": "",
+        "ok": true,
+        "headers": {
+          "access-control-allow-credentials": "true",
+          "access-control-allow-origin": "http://localhost:5173",
+          "authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMiIsImlhdCI6MTc0MzU2NzAwNiwiZXhwIjoxNzQ0MTcxODA2fQ.iC34nJ1lg_VS83Llg61YNeyxBGZ3rHZyvRPhVLP3kgA",
+          "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+          "content-type": "application/json",
+          "expires": "0",
+          "pragma": "no-cache"
+        },
+        "body": {
+          "id": 2,
+          "username": "user2",
+          "email": "user2@gmail.com",
+          "wsUrl": "ws://localhost:8086"
+        }
+      }
+    },
+    {
+      "id": "m8ynk583wsbtd5b",
+      "name": "Workspace All",
+      "url": "http://localhost:8080/api/workspace",
+      "method": "GET",
+      "headers": "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMiIsImlhdCI6MTc0MzU2NTUxMSwiZXhwIjoxNzQ0MTcwMzExfQ.gtBSfBfIlEWLaJ0R4E_d66dZWxERb26s3JYfSgKPNu8\n",
+      "body": "",
+      "testScript": "",
+      "lastResponse": {
+        "timestamp": "2025-04-02T04:39:13.378Z",
+        "status": 200,
+        "statusText": "",
+        "ok": true,
+        "headers": {
+          "access-control-allow-credentials": "true",
+          "access-control-allow-origin": "http://localhost:5173",
+          "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+          "content-type": "application/json",
+          "expires": "0",
+          "pragma": "no-cache"
+        },
+        "body": [
+          {
+            "id": 1,
+            "name": "user1_workspace1",
+            "users": null,
+            "creator": null,
+            "rooms": null
+          },
+          {
+            "id": 2,
+            "name": "user2_workspace1",
+            "users": null,
+            "creator": null,
+            "rooms": null
+          }
+        ]
+      }
+    },
+    {
+      "id": "m8yobmsot4hzxxb",
+      "name": "Workspace Create",
+      "url": "http://localhost:8080/api/workspace",
+      "method": "POST",
+      "headers": "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMiIsImlhdCI6MTc0MzU2NTUxMSwiZXhwIjoxNzQ0MTcwMzExfQ.gtBSfBfIlEWLaJ0R4E_d66dZWxERb26s3JYfSgKPNu8",
+      "body": "{\n    \"name\" : \"user2_workspace1\"\n}",
+      "testScript": "",
+      "lastResponse": {
+        "timestamp": "2025-04-02T04:15:38.403Z",
+        "status": 200,
+        "statusText": "",
+        "ok": true,
+        "headers": {
+          "access-control-allow-credentials": "true",
+          "access-control-allow-origin": "http://localhost:5173",
+          "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+          "content-length": "0",
+          "expires": "0",
+          "pragma": "no-cache"
+        },
+        "body": ""
+      }
+    },
+    {
+      "id": "m8yod9xcj171p28",
+      "name": "Workspace Get byID",
+      "url": "http://localhost:8080/api/workspace/2",
+      "method": "GET",
+      "headers": "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMiIsImlhdCI6MTc0MzU2NTUxMSwiZXhwIjoxNzQ0MTcwMzExfQ.gtBSfBfIlEWLaJ0R4E_d66dZWxERb26s3JYfSgKPNu8\n",
+      "body": "",
+      "testScript": "",
+      "lastResponse": {
+        "timestamp": "2025-04-02T04:39:47.731Z",
+        "status": 200,
+        "statusText": "",
+        "ok": true,
+        "headers": {
+          "access-control-allow-credentials": "true",
+          "access-control-allow-origin": "http://localhost:5173",
+          "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+          "content-type": "application/json",
+          "expires": "0",
+          "pragma": "no-cache",
+          "x-workspace-id": "MQ=="
+        },
+        "body": {
+          "id": 1,
+          "name": "user1_workspace1",
+          "users": [
+            {
+              "id": 1,
+              "username": "user1",
+              "email": "user1@gmail.com",
+              "password": null,
+              "workspaces": null,
+              "rooms": null
+            },
+            {
+              "id": 2,
+              "username": "user2",
+              "email": "user2@gmail.com",
+              "password": null,
+              "workspaces": null,
+              "rooms": null
+            }
+          ],
+          "creator": {
+            "id": 1,
+            "username": "user1",
+            "email": "user1@gmail.com",
+            "password": null,
+            "workspaces": null,
+            "rooms": null
+          },
+          "rooms": []
+        }
+      }
+    },
+    {
+      "id": "m8ze329ldcn6w6r",
+      "name": "Invite getAll",
+      "url": "http://localhost:8080/api/invite",
+      "method": "GET",
+      "headers": "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMiIsImlhdCI6MTc0MzU2NTUxMSwiZXhwIjoxNzQ0MTcwMzExfQ.gtBSfBfIlEWLaJ0R4E_d66dZWxERb26s3JYfSgKPNu8\nX-workspace-id: Mg==",
+      "body": "",
+      "testScript": "",
+      "lastResponse": {
+        "timestamp": "2025-04-02T04:33:09.366Z",
+        "status": 200,
+        "statusText": "",
+        "ok": true,
+        "headers": {
+          "access-control-allow-credentials": "true",
+          "access-control-allow-origin": "http://localhost:5173",
+          "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+          "content-type": "application/json",
+          "expires": "0",
+          "pragma": "no-cache"
+        },
+        "body": [
+          {
+            "id": 1,
+            "inviter": {
+              "id": 1,
+              "username": "user1",
+              "email": "user1@gmail.com",
+              "password": null,
+              "workspaces": null,
+              "rooms": null
+            },
+            "invitee": {
+              "id": 2,
+              "username": "user2",
+              "email": "user2@gmail.com",
+              "password": null,
+              "workspaces": null,
+              "rooms": null
+            },
+            "workspace": {
+              "id": 1,
+              "name": "user1_workspace1",
+              "users": null,
+              "creator": null,
+              "rooms": null
+            },
+            "status": "ACCEPTED"
+          },
+          {
+            "id": 2,
+            "inviter": {
+              "id": 1,
+              "username": "user1",
+              "email": "user1@gmail.com",
+              "password": null,
+              "workspaces": null,
+              "rooms": null
+            },
+            "invitee": {
+              "id": 2,
+              "username": "user2",
+              "email": "user2@gmail.com",
+              "password": null,
+              "workspaces": null,
+              "rooms": null
+            },
+            "workspace": {
+              "id": 1,
+              "name": "user1_workspace1",
+              "users": null,
+              "creator": null,
+              "rooms": null
+            },
+            "status": "PENDING"
+          }
+        ]
+      }
+    },
+    {
+      "id": "m8ze4xmuyyr5r35",
+      "name": "Invite Accept",
+      "url": "http://localhost:8080/api/invite/1/accept",
+      "method": "PATCH",
+      "headers": "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMiIsImlhdCI6MTc0MzU2NzAwNiwiZXhwIjoxNzQ0MTcxODA2fQ.iC34nJ1lg_VS83Llg61YNeyxBGZ3rHZyvRPhVLP3kgA\nX-workspace-id: Mg==",
+      "body": "",
+      "testScript": "",
+      "lastResponse": {
+        "timestamp": "2025-04-02T04:33:31.577Z",
+        "status": 200,
+        "statusText": "",
+        "ok": true,
+        "headers": {
+          "access-control-allow-credentials": "true",
+          "access-control-allow-origin": "http://localhost:5173",
+          "cache-control": "no-cache, no-store, max-age=0, must-revalidate",
+          "content-length": "0",
+          "expires": "0",
+          "pragma": "no-cache"
+        },
+        "body": ""
+      }
+    }
+  ],
+  "socketSettings": {
+    "url": "ws://localhost:8086",
+    "connectionHeaders": "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMiIsImlhdCI6MTc0MzU2NzMwNCwiZXhwIjoxNzQ0MTcyMTA0fQ.a_f3-9KFlbuyhHZGxLW2dCTuZTmr2MaVVdllUkyEec8\nX-workspace-id: MQ=="
+  },
+  "scratchpadContent": "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMiIsImlhdCI6MTc0MzU2NzMwNCwiZXhwIjoxNzQ0MTcyMTA0fQ.a_f3-9KFlbuyhHZGxLW2dCTuZTmr2MaVVdllUkyEec8\nX-workspace-id: MQ=="
+}
