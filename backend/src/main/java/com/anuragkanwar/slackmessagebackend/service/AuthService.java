@@ -9,5 +9,5 @@ public interface AuthService {
 
     ResponseEntity<?> signup(SignupRequestDto signupRequestDto);
 
-    ResponseEntity<?> getMe();
+    ResponseEntity<?> getMe(String jwtToken);
 }

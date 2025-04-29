@@ -106,7 +106,7 @@ public class InviteServiceImpl implements InviteService {
         User inviter = userRepository.getReferenceById(inviterId);
 
         Workspace workspace =
-                workspaceRepository.getWorkspaceById(requestDto.getWorkspaceId())
+                workspaceRepository.getWorkspaceById(Long.valueOf(Utils.decodeFromBase64(requestDto.getWorkspaceId())))
                         .orElseThrow(() ->
                                 new ResourceNotFoundException("Workspace does not exists with " +
                                         "id:" + requestDto.getWorkspaceId()));

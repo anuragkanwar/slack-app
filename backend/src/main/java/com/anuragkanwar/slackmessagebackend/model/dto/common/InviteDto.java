@@ -24,6 +24,8 @@ public class InviteDto {
 
 
     public static InviteDto toDto(Invite invite) {
+        if (invite == null)
+            return null;
         return InviteDto.builder()
                 .id(invite.getId())
                 .inviter(UserDto.ToDtoSmall(invite.getInviter()))

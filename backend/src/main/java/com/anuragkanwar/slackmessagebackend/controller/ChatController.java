@@ -4,7 +4,6 @@ package com.anuragkanwar.slackmessagebackend.controller;
 import com.anuragkanwar.slackmessagebackend.model.dto.request.CreateChatRequestDto;
 import com.anuragkanwar.slackmessagebackend.model.dto.request.UpdateChatRequestDto;
 import com.anuragkanwar.slackmessagebackend.service.ChatService;
-import com.corundumstudio.socketio.SocketIOServer;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,11 +14,9 @@ import org.springframework.web.bind.annotation.*;
 public class ChatController {
 
     private final ChatService chatService;
-    private final SocketIOServer server;
 
-    public ChatController(ChatService chatService, SocketIOServer server) {
+    public ChatController(ChatService chatService) {
         this.chatService = chatService;
-        this.server = server;
     }
 
     @PostMapping

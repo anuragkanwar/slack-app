@@ -27,8 +27,8 @@ public class AuthController {
     }
 
     @GetMapping("/getMe")
-    public ResponseEntity<?> getAlreadyLoggedInUser() {
-        return authService.getMe();
+    public ResponseEntity<?> getAlreadyLoggedInUser(@CookieValue("token") String jwtToken) {
+        return authService.getMe(jwtToken);
     }
 
 }

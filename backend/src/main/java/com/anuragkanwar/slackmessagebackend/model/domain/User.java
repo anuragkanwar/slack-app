@@ -26,6 +26,9 @@ public class User extends AbstractAuditingEntity {
     @Column(nullable = false, unique = true)
     private String username;
 
+    @Column(nullable = false)
+    private String avatarUrl;
+
     @Column(nullable = false, unique = true)
     private String email;
 
@@ -41,7 +44,8 @@ public class User extends AbstractAuditingEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
+        if (o == null || getClass() != o.getClass())
+            return false;
         User user = (User) o;
         return Objects.equals(id, user.id);
     }

@@ -1,9 +1,12 @@
 package com.anuragkanwar.slackmessagebackend.model.dto.common;
 
 import com.anuragkanwar.slackmessagebackend.model.domain.User;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-import java.util.*;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Getter
@@ -14,6 +17,7 @@ public class UserDto {
 
     private Long id;
     private String username;
+    private String avatarUrl;
     private String email;
     private String password;
     private Set<WorkspaceDto> workspaces;
@@ -21,9 +25,12 @@ public class UserDto {
 
 
     public static UserDto ToDto(User user) {
+        if (user == null)
+            return null;
         return UserDto.builder()
                 .id(user.getId())
                 .username(user.getUsername())
+                .avatarUrl(user.getAvatarUrl())
                 .email(user.getEmail())
                 .workspaces(WorkspaceDto.workspaceSetToWorkspaceDtoSet(user.getWorkspaces()))
                 .rooms(RoomDto.roomSetToRoomDtoSet(user.getRooms()))
@@ -31,10 +38,12 @@ public class UserDto {
     }
 
     public static UserDto ToDtoSmall(User user) {
-
+        if (user == null)
+            return null;
         return UserDto.builder()
                 .id(user.getId())
                 .username(user.getUsername())
+                .avatarUrl(user.getAvatarUrl())
                 .email(user.getEmail())
                 .build();
     }

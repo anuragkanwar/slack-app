@@ -21,7 +21,7 @@ import lombok.experimental.SuperBuilder;
 public class Chat extends AbstractAuditingEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
@@ -30,7 +30,7 @@ public class Chat extends AbstractAuditingEntity {
     @Enumerated(EnumType.STRING)
     private ChatType chatType;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     private Chat parent;
 
     @ManyToOne

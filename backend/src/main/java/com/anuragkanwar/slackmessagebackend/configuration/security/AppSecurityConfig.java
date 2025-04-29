@@ -44,7 +44,7 @@ public class AppSecurityConfig {
                         httpSecurityCorsConfigurer.configurationSource(request -> {
                             CorsConfiguration config = new CorsConfiguration();
                             config.setAllowCredentials(true);
-                            config.setAllowedOrigins(List.of("http://localhost:5173"));
+                            config.setAllowedOrigins(List.of("http://localhost:3000"));
                             config.setAllowedHeaders(Arrays.asList("Origin", "Access-Control-Allow-Origin",
                                     "Content-Type", "Accept", "Authorization",
                                     Constants.USERNAME_AUTH_HEADER,

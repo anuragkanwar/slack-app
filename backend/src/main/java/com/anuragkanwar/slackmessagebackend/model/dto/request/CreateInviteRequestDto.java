@@ -13,5 +13,5 @@ import java.util.List;
 @Builder
 public class CreateInviteRequestDto {
     private List<Long> inviteeIds;
-    private Long workspaceId;
+    private String workspaceId;
 }

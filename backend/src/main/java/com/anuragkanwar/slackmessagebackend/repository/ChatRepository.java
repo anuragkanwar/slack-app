@@ -34,7 +34,7 @@ public interface ChatRepository extends JpaRepository<Chat, Long> {
                      room_id = :roomId
                      AND (
                          (chat_type = 'USER' AND id IN (SELECT id FROM user_chats))
-                         OR\s
+                         OR
                          (chat_type = 'SERVER' AND created_at >= (
                              SELECT MIN(created_at) FROM user_chats
                          ) AND created_at < :cursorCreatedAt

@@ -25,6 +25,8 @@ public class RoomDto {
     private UserDto creator;
 
     public static RoomDto toDto(Room room) {
+        if (room == null)
+            return null;
         return RoomDto.builder()
                 .id(room.getId())
                 .name(room.getName())
@@ -38,6 +40,8 @@ public class RoomDto {
 
 
     public static RoomDto toDtoSmall(Room room) {
+        if (room == null)
+            return null;
         return RoomDto.builder()
                 .id(room.getId())
                 .name(room.getName())

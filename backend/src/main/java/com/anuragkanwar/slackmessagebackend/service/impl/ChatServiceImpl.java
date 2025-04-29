@@ -23,6 +23,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -71,10 +72,11 @@ public class ChatServiceImpl implements ChatService {
         String nextCursor = lastUserChat
                 .map(c -> new ChatCursor(c.getCreatedAt(), c.getId()).encode())
                 .orElse(null);
-
+        List<ChatDto> toSendChats = new java.util.ArrayList<>(chats.stream().map(ChatDto::toDto).toList());
+        Collections.reverse(toSendChats);
         return ChatHistoryResponseDto.builder()
                 .nextCursor(nextCursor)
-                .chats(chats.stream().map(ChatDto::toDto).toList())
+                .chats(toSendChats)
                 .build();
     }
 
@@ -97,6 +99,7 @@ public class ChatServiceImpl implements ChatService {
                 .message(chatRequestDto.getMessage())
                 .user(user)
                 .room(room)
+                .chatType(ChatType.USER)
                 .build();
 
         if (chatRequestDto.getParentId() != null) {
@@ -104,12 +107,11 @@ public class ChatServiceImpl implements ChatService {
             toBeSaved.setParent(parent);
         }
 
-
         Chat savedChat = chatRepository.save(toBeSaved);
 
         applicationEventPublisher.publishEvent(new MessageEvent(
                 this,
-                ChatDto.toDtoSmall(savedChat),
+                ChatDto.toDto(savedChat),
                 Utils.getChannelRoom(chatRequestDto.getRoomId().toString())
         ));
 
@@ -118,7 +120,6 @@ public class ChatServiceImpl implements ChatService {
 
 
     @Transactional
-
     @Override
     public Chat updateChat(Long chatId, UpdateChatRequestDto requestDto) {
         Long userId =

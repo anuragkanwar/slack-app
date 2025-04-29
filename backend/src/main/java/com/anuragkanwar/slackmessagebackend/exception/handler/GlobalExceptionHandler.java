@@ -17,7 +17,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
             ApiException exception,
             WebRequest webRequest
     ) {
-        return ResponseEntity.internalServerError()
+        return ResponseEntity.status(exception.getHttpStatus().value())
                 .body(ErrorResponse.builder()
                         .detail(exception.getMessage())
                         .title(exception.getHttpStatus().getReasonPhrase())

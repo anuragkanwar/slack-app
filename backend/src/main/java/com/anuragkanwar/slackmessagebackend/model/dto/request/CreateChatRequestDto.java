@@ -1,14 +1,12 @@
 package com.anuragkanwar.slackmessagebackend.model.dto.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@ToString
 public class CreateChatRequestDto {
     private Long roomId;
     private String message;

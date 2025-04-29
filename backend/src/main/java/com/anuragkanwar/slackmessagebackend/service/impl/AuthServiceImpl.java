@@ -5,12 +5,14 @@ import com.anuragkanwar.slackmessagebackend.configuration.security.service.UserD
 import com.anuragkanwar.slackmessagebackend.exception.general.BadRequestException;
 import com.anuragkanwar.slackmessagebackend.exception.general.ResourceNotFoundException;
 import com.anuragkanwar.slackmessagebackend.model.domain.User;
+import com.anuragkanwar.slackmessagebackend.model.domain.Workspace;
+import com.anuragkanwar.slackmessagebackend.model.dto.common.WorkspaceDto;
 import com.anuragkanwar.slackmessagebackend.model.dto.request.LoginRequestDto;
 import com.anuragkanwar.slackmessagebackend.model.dto.request.SignupRequestDto;
 import com.anuragkanwar.slackmessagebackend.model.dto.response.AuthResponseDto;
+import com.anuragkanwar.slackmessagebackend.repository.WorkspaceRepository;
 import com.anuragkanwar.slackmessagebackend.service.AuthService;
 import com.anuragkanwar.slackmessagebackend.service.UserService;
-import com.anuragkanwar.slackmessagebackend.service.WorkspaceService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -26,15 +28,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.Duration;
+import java.util.Set;
 
 @Service
 public class AuthServiceImpl implements AuthService {
 
     final AuthenticationManager authenticationManager;
     final UserService userService;
-    final WorkspaceService workspaceService;
     final PasswordEncoder encoder;
     final JwtUtils jwtUtils;
+    final WorkspaceRepository workspaceRepository;
 
     @Value("${socketio.host}")
     private String socketioHost;
@@ -42,13 +45,13 @@ public class AuthServiceImpl implements AuthService {
     private int socketioPort;
 
     public AuthServiceImpl(AuthenticationManager authenticationManager, UserService userService,
-                           WorkspaceService workspaceService, PasswordEncoder encoder,
-                           JwtUtils jwtUtils) {
+                           PasswordEncoder encoder,
+                           JwtUtils jwtUtils, WorkspaceRepository workspaceRepository) {
         this.authenticationManager = authenticationManager;
         this.userService = userService;
-        this.workspaceService = workspaceService;
         this.encoder = encoder;
         this.jwtUtils = jwtUtils;
+        this.workspaceRepository = workspaceRepository;
     }
 
     @Override
@@ -60,7 +63,8 @@ public class AuthServiceImpl implements AuthService {
                     authenticationManager.authenticate(
                             new UsernamePasswordAuthenticationToken(loginRequestDto.getUsername()
                                     , loginRequestDto.getPassword()));
-        } catch (AuthenticationException e) {
+        } catch (
+                AuthenticationException e) {
             throw new ResourceNotFoundException("Bad Credentials");
         }
 
@@ -77,15 +81,19 @@ public class AuthServiceImpl implements AuthService {
                 .build();
 
         String websocketUrl = String.format("ws://%s:%d", socketioHost, socketioPort);
+        Set<Workspace> workspaces = workspaceRepository.findByUsers_Id(userDetails.getId());
 
         return ResponseEntity.status(HttpStatus.OK)
-//                .header(HttpHeaders.SET_COOKIE, cookie.toString())
-                .header(HttpHeaders.AUTHORIZATION, "Bearer " + jwtToken)
+                .header(HttpHeaders.SET_COOKIE, cookie.toString())
+//                .header(HttpHeaders.AUTHORIZATION, "Bearer " + jwtToken)
                 .body(AuthResponseDto.builder()
                         .id(userDetails.getId())
                         .username(userDetails.getUsername())
+                        .avatarUrl("https://api.dicebear.com/9.x/pixel-art-neutral/svg?seed=" + userDetails.getUsername())
                         .email(userDetails.getEmail())
                         .wsUrl(websocketUrl)
+                        .workspaces(WorkspaceDto.workspaceSetToWorkspaceDtoSet(workspaces))
+                        .token(jwtToken)
                         .build());
     }
 
@@ -103,6 +111,7 @@ public class AuthServiceImpl implements AuthService {
         User user = User.builder()
                 .username(signUpRequestDto.getUsername())
                 .email(signUpRequestDto.getEmail())
+                .avatarUrl("https://api.dicebear.com/9.x/pixel-art-neutral/svg?seed=" + signUpRequestDto.getUsername())
                 .password(encoder.encode(signUpRequestDto.getPassword()))
                 .build();
 
@@ -126,29 +135,36 @@ public class AuthServiceImpl implements AuthService {
 
         String websocketUrl = String.format("ws://%s:%d", socketioHost, socketioPort);
 
+        Set<Workspace> workspaces = workspaceRepository.findByUsers_Id(savedUser.getId());
         return ResponseEntity.status(HttpStatus.OK)
-//                .header(HttpHeaders.SET_COOKIE, cookie.toString())
-                .header(HttpHeaders.AUTHORIZATION, "Bearer " + jwtToken)
+                .header(HttpHeaders.SET_COOKIE, cookie.toString())
+//                .header(HttpHeaders.AUTHORIZATION, "Bearer " + jwtToken)
                 .body(AuthResponseDto.builder()
                         .id(savedUser.getId())
                         .username(savedUser.getUsername())
+                        .avatarUrl(savedUser.getAvatarUrl())
                         .email(savedUser.getEmail())
                         .wsUrl(websocketUrl)
+                        .token(jwtToken)
+                        .workspaces(WorkspaceDto.workspaceSetToWorkspaceDtoSet(workspaces))
                         .build());
     }
 
     @Override
-    public ResponseEntity<?> getMe() {
+    public ResponseEntity<?> getMe(String jwtToken) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         String websocketUrl = String.format("ws://%s:%d", socketioHost, socketioPort);
-
+        Set<Workspace> workspaces = workspaceRepository.findByUsers_Id(userDetails.getId());
         return ResponseEntity.status(HttpStatus.OK)
                 .body(AuthResponseDto.builder()
                         .id(userDetails.getId())
+                        .avatarUrl("https://api.dicebear.com/9.x/pixel-art-neutral/svg?seed=" + userDetails.getUsername())
                         .username(userDetails.getUsername())
                         .email(userDetails.getEmail())
                         .wsUrl(websocketUrl)
+                        .token(jwtToken)
+                        .workspaces(WorkspaceDto.workspaceSetToWorkspaceDtoSet(workspaces))
                         .build());
     }
 }
