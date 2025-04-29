@@ -1,0 +1,21 @@
+export enum SocketEvent {
+  boot_room_list = "boot_room_list",
+  boot_user_list = "boot_user_list",
+  room_created = "room_created",
+  room_deleted = "room_deleted",
+  room_joined = "room_joined",
+  room_left = "room_left",
+  room_rename = "room_rename",
+  goodbye = "goodbye",
+  hello = "hello",
+  manual_presence_change = "manual_presence_change",
+  member_joined_room = "member_joined_room",
+  member_left_room = "member_left_room",
+  message = "message",
+  presence_change = "presence_change",
+  typing = "typing",
+  user_typing = "user_typing",
+  user_joined_workspace = "user_joined_workspace",
+  user_left_workspace = "user_left_workspace",
+}
+
